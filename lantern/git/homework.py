@@ -48,9 +48,8 @@ def multiple_ints(first_value: int, second_value: int) -> int:
     Returns:
         Product of elements
     """
-
-    if first_value and second_value is not int():
-            raise TypeError
+    if type(first_value) != int or type(second_value) != int:
+               raise TypeError
     else:
 
         return first_value * second_value
@@ -115,12 +114,14 @@ def some_loop_exercise() -> list:
     """
     Use loop to create list that contain int values from 0 to 12 except 6 and 7
     """
+
+
     values = []
     for i in range(13):
         if i == 6 or i == 7:
             continue
-
-    return values
+    else:
+        values.append(i)
 
 def remove_from_list_all_negative_numbers(data: List[int]) -> list:
     """

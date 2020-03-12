@@ -120,8 +120,8 @@ def some_loop_exercise() -> list:
     for i in range(13):
         if i == 6 or i == 7:
             continue
-    else:
-        values.append(i)
+        else:
+             values.append(i)
 
     return values
 

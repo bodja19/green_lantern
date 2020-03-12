@@ -123,6 +123,8 @@ def some_loop_exercise() -> list:
     else:
         values.append(i)
 
+    return values
+
 def remove_from_list_all_negative_numbers(data: List[int]) -> list:
     """
     Use loops to solve this task.

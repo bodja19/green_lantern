@@ -76,13 +76,10 @@ class Cat:
     * Реалізуйте get_average_speed і поверніть середню швидкість
     """
 
-    def __init__(self, age):
+    def __init__(self, age, food):
         self.age = age
         self.saturation_level = 50
-
-    def saturation_level(self):
-        self.saturation_level = 50
-        return self.saturation_level
+        self.food = food
 
     def average_speed(self):
         return self._set_average_speed()
@@ -90,26 +87,26 @@ class Cat:
     def eat(self, food):
 
         if food == "fodder":
-            return self._increase_saturation_level() + 10
+            return self.eat(10)
         elif food == "apple":
-            return self._increase_saturation_level() + 5
+            return self.self.eat(5)
         elif food == "milk":
-            return self._increase_saturation_level() + 2
+            return self.self.eat(2)
         else:
-            return self._increase_saturation_level() + 0
+            return self.self.eat(0)
 
     def _reduce_saturation_level(self):
         if self.saturation_level < 0:
             return 0
         else:
-            self.saturation_level -= self._reduce_saturation_level
-            return self.saturation_level
+            return self.saturation_level() -= self.run
+
 
     def _increase_saturation_level(self):
         if self.saturation_level >= 100:
             return 100
         else:
-            return self.saturation_level + self.eat("")
+            return self.saturation_level + self.eat
 
     def _set_average_speed(self):
         if self.age <= 7:
@@ -120,17 +117,17 @@ class Cat:
             return 6
 
     def run(self, hours):
-        time_h = self._set_average_speed() * hours
+        time_h = self.average_speed() * hours
         if time_h <= 25:
-            return self._reduce_saturation_level() - 2
+            return self._reduce_saturation_level(-2)
         elif 25 < time_h <= 50:
-            return self._reduce_saturation_level() - 5
+            return self._reduce_saturation_level(-5)
         elif 50 < time_h <= 100:
-            return self._reduce_saturation_level() - 15
+            return self._reduce_saturation_level(-15)
         elif 100 < time_h <= 200:
-            return self._reduce_saturation_level() - 25
+            return self._reduce_saturation_level(-25)
         elif time_h > 200:
-            return self._reduce_saturation_level() - 50
+            return self._reduce_saturation_level(-50)
 
     def get_saturation_level(self):
         if self.saturation_level == 0:
@@ -249,7 +246,7 @@ ________________________________________________________________________
 
     def roof_square(self):
         if self.roof_type == "gable":
-            return (self.width * self.height) * 2
+            return self.width * self.height * 2
         elif self.roof_type == "single-pitch":
             return self.width * self.height
         else:
@@ -462,11 +459,9 @@ ________________________________________________________________________________
     def create_roof(self, width, height, roof_type):
         if width == 0 or height == 0:
             raise ValueError("Value must be not 0")
-        else:
-            if len(self.__roof) >= 1:
-                raise ValueError("The house can not have two roofs")
-            else:
-                self.__roof.append(Roof(width, height, roof_type))
+        if self.__roof:
+            raise ValueError("The house can not have two roofs")
+        self.__roof = Roof(width, height, roof_type)
 
     def create_window(self, width, height):
         if width == 0 or height == 0:
@@ -477,11 +472,9 @@ ________________________________________________________________________________
     def create_door(self, width, height):
         if width == 0 or height == 0:
             raise ValueError("Value must be not 0")
-        else:
-            if len(self.__door) >= 1:
-                raise ValueError("The house can not have two doors")
-            else:
-                self.__door.append(Door(width, height))
+        if self.__door:
+            raise ValueError("The house can not have two doors")
+        self.__door = Door(width, height)
 
     def get_count_of_walls(self):
         return len(self.__walls)
@@ -499,16 +492,16 @@ ________________________________________________________________________________
         return self.__door.update_metal_price(new_price)
 
     def get_roof_square(self):
-        return sum(i.rood_square() for i in self.__roof)
+        return self.__roof.roof_square()
 
     def get_walls_square(self):
         return sum(i.wall_square() for i in self.__walls)
 
     def get_windows_square(self):
-        return sum(i.windows_square() for i in self.__windows)
+        return sum(i.window_square() for i in self.__windows)
 
     def get_door_square(self):
-        return sum(i.door_square() for i in self.__door)
+        return self.__door.door_square()
 
     def get_number_of_rolls_of_wallpapers(self, roll_width_m, roll_length_m):
         if roll_width_m == 0 or roll_length_m == 0:

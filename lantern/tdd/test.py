@@ -30,20 +30,26 @@ class TestRobotCreation:
 
 class TestMove:
     def setup(self):
-        x, y = 10, 15
-        self.asteroid = Asteroid(x + 1, y + 1)
+        self.x, self.y = 10, 15
+        self.asteroid = Asteroid(self.x + 1, self.y + 1)
+        self.direction = self.curent_direction
     @pytest.mark.parametrize(
         "curent_direction,expected_direction",
         (
-                ("N", "W"),
-                ("W", "S"),
-                ("S", "E"),
+        ("N", "W"),
+        ("W", "S"),
+        ("S", "E"),
         )
     )
+
     def test_turn_left(self, curent_direction, expected_direction):
-        robot = Robot(self.setup(), asteroid, curent_direction)
+        print(self.setup())
+        print(self.asteroid)
+        print(curent_direction)
+        robot = Robot(self.setup, self.asteroid, curent_direction)
         robot.turn_left()
         assert robot.direction == expected_direction
+
 
     """def test_turn_right(self):
         x, y = 10, 15

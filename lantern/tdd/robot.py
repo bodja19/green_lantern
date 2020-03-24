@@ -16,7 +16,11 @@ class Robot:
             raise MissAsteroidErro()
 
     def turn_left(self):
-        turns = {"E": "N"}
+        turns = {"E": "N",
+                 "N": "W",
+                 "W": "S",
+                 "S": "E"
+         }
         self.direction = turns[self.direction]
 
     """def turn_right(self):

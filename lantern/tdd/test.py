@@ -90,16 +90,16 @@ class TestMove:
         assert robot.x, robot.y == expected_move
 
     @pytest.mark.parametrize(
-        "move_back,expected_move,move_direction",
-        [(15, 16, "S"),
-         (10, 9, "E"),
-         (30, 30, "W"),
-         ]
+        "move_backed,expected_move,move_direction",
+
+            ((8, 15), (8, 16), ("S")),
+            ((10, 15), (9, 15), ("E")),
+        }
     )
-    def test_move_backward(self, move_back, move_direction, expected_move):
-        robot = Robot(self.x, self.y, self.asteroid, move_direction)
+    def test_move_backward(self, move_backed, move_direction, expected_move):
+        robot = Robot(move_backed, self.asteroid, move_direction)
         robot.move_back()
-        print(move_back, expected_move)
+        print(move_backed, expected_move)
         print(robot.x, robot.y)
         assert robot.x, robot.y == expected_move
 
@@ -111,6 +111,7 @@ class TestMove:
         robot = Robot(10, 20, asteroid, "W")
         robot.check_drop()
         assert robot.x == 10
+        assert MoveError
 
     @pytest.mark.parametrize(
         "obstacle_X,obstacle_Y",

@@ -11,7 +11,7 @@ from robot import Robot, Asteroid, MissAsteroidErro, MoveError
 Оновіть рух робота, щоб дотримуватися перешкод
 ... Ваші ідеї
 
-Домашня робота
+Домашня роботаmove_direction
 Закінчіть тестування оборотів
 Логіка руху коду move_forward, move_backward
 Перевірте, чи не падає робот з астероїду
@@ -92,9 +92,9 @@ class TestMove:
     @pytest.mark.parametrize(
         "move_backed,expected_move,move_direction",
 
-            ((8, 15), (8, 16), ("S")),
-            ((10, 15), (9, 15), ("E")),
-        }
+        ((8, 15), (8, 16), ("S")),
+        ((10, 15), (9, 15), ("E")),
+
     )
     def test_move_backward(self, move_backed, move_direction, expected_move):
         robot = Robot(move_backed, self.asteroid, move_direction)
@@ -102,6 +102,11 @@ class TestMove:
         print(move_backed, expected_move)
         print(robot.x, robot.y)
         assert robot.x, robot.y == expected_move
+
+    def test__error_backward(self):
+        with pytest.raises(MoveError):
+            asteroid = Asteroid(14, 25)
+            Robot(14, 25, asteroid, "W")
 
     """(15, "MoveError", "B")- 'вставив в тюпл' перевіряв чи давши неправильний напрямок вилітає помилка- все 
     праціє тільки як додати в тест незнаю"""

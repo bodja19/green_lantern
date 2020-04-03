@@ -22,6 +22,10 @@ def task_1_add_new_record_to_db(con) -> None:
         cursor.execute("INSERT INTO customers VALUES(92,'Thomas','David','Some Address','London','774','Singapore');")
 
 
+
+
+
+
 def task_2_list_all_customers(cur) -> list:
     """
     Get all records from table Customers

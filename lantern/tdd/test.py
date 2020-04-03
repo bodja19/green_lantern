@@ -140,7 +140,7 @@ class TestMove:
 
         """
         (self, asteroid_size, robot_coordinates):
-        with pytest.raises(MissAsteroidErro):
+        ith pytest.raises(MissAsteroidErro):
             asteroid = Asteroid(*asteroid_size)
             Robot(*robot_coordinates, asteroid, "W")
     @pytest.mark.parametrize(

@@ -1,4 +1,5 @@
 import pytest
+
 from robot import Robot, Asteroid, MissAsteroidErro, MoveError
 
 """Порядок денний:
@@ -25,7 +26,7 @@ class TestRobotCreation:
     def test_parameters(self):
         x, y = 10, 15
         direction = "E"
-        asteroid = Asteroid(30, y + 1)
+        asteroid = Asteroid(15, 25)
         robot = Robot(x, y, asteroid, direction)
         assert robot.direction == direction
         assert robot.x == 10
@@ -78,38 +79,40 @@ class TestMove:
         assert robot.direction == expected_direction
 
     @pytest.mark.parametrize(
-        "move_forward,expected_move,move_direction",
-        [(15, 14, "S"),
-         (10, 11, "E"),
-         (10, 9, "W"),
+        "move_forward_x, move_forward_y,expected_move_x,expected_move_y,move_direction",
+        [(10, 15, 10, 14, "S"),
+         (10, 15, 11, 15, "E"),
+         (10, 15, 9, 15, "W"),
+         (10, 24, 10, 25, "B"),
          ]
     )
-    def test_move_forward(self, move_forward, move_direction, expected_move):
-        robot = Robot(self.x, self.y, self.asteroid, move_direction)
+    def test_move_forward(self, move_forward_x, move_forward_y, expected_move_x, expected_move_y, move_direction):
+        print(self.asteroid.height)
+        robot = Robot(move_forward_x, move_forward_y, self.asteroid, move_direction)
         robot.move_forwa()
-        assert robot.x, robot.y == expected_move
+        assert robot.x == expected_move_x
+        assert robot.y == expected_move_y
 
     @pytest.mark.parametrize(
-        "move_backed,expected_move,move_direction",
-
-        ((8, 15), (8, 16), ("S")),
-        ((10, 15), (9, 15), ("E")),
-
+        "move_back_x, move_back_y,expected_move_x,expected_move_y,move_direction",
+        [(10, 15, 10, 16, "S"),
+         (10, 15, 9, 15, "E"),
+         (10, 15, 11, 15, "W"),
+         ]
     )
-    def test_move_backward(self, move_backed, move_direction, expected_move):
-        robot = Robot(move_backed, self.asteroid, move_direction)
+    def test_move_backward(self, move_back_x, move_back_y,expected_move_x,expected_move_y,move_direction):
+        robot = Robot(move_back_x, move_back_y, self.asteroid, move_direction)
         robot.move_back()
-        print(move_backed, expected_move)
-        print(robot.x, robot.y)
-        assert robot.x, robot.y == expected_move
+        assert robot.x == expected_move_x
+        assert robot.y == expected_move_y
+
 
     def test__error_backward(self):
         with pytest.raises(MoveError):
             asteroid = Asteroid(14, 25)
-            Robot(14, 25, asteroid, "W")
+            robot = Robot(14, 25, asteroid, "W")
+            robot.move_back()
 
-    """(15, "MoveError", "B")- 'вставив в тюпл' перевіряв чи давши неправильний напрямок вилітає помилка- все 
-    праціє тільки як додати в тест незнаю"""
 
     def test_drop_robot_asteroid(self):
         asteroid = Asteroid(14, 25)
@@ -127,12 +130,13 @@ class TestMove:
         )
     )
     def test_obstacle_robot_on_asteroid(self, obstacle_X, obstacle_Y):
-        asteroid = Asteroid(20, 25)
-        robot = Robot(15, 20, asteroid, "W")
-        robot.check_obstacle(obstacle_X, obstacle_Y)
+        with pytest.raises(MoveError):
+            asteroid = Asteroid(20, 25)
+            robot = Robot(15, 20, asteroid, "W")
+            robot.check_obstacle(obstacle_X, obstacle_Y)
 
-        assert robot.x == 15
-        assert MoveError
+
+
 
         """
         (self, asteroid_size, robot_coordinates):

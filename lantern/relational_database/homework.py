@@ -1,6 +1,5 @@
 from typing import List
 
-
 def task_1_add_new_record_to_db(con) -> None:
     """
     Add a record for a new customer from Singapore

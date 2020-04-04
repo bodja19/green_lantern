@@ -83,7 +83,6 @@ class TestMove:
         [(10, 15, 10, 14, "S"),
          (10, 15, 11, 15, "E"),
          (10, 15, 9, 15, "W"),
-         (10, 24, 10, 25, "B"),
          ]
     )
     def test_move_forward(self, move_forward_x, move_forward_y, expected_move_x, expected_move_y, move_direction):
@@ -124,9 +123,9 @@ class TestMove:
     @pytest.mark.parametrize(
         "obstacle_X,obstacle_Y",
         (
-                (1, 2),
+                (1, 20),
                 (15, 2),
-                (30, 30),
+                (15, 24),
         )
     )
     def test_obstacle_robot_on_asteroid(self, obstacle_X, obstacle_Y):

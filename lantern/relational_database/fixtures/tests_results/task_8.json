@@ -53,6 +53,10 @@
   },
   {
     "count" : 1,
+    "city" : "Århus"
+  },
+  {
+    "count" : 1,
     "city" : "Barcelona"
   },
   {
@@ -77,15 +81,15 @@
   },
   {
     "count" : 1,
+    "city" : "Bräcke"
+  },
+  {
+    "count" : 1,
     "city" : "Brandenburg"
   },
   {
     "count" : 1,
     "city" : "Bruxelles"
-  },
-  {
-    "count" : 1,
-    "city" : "Bräcke"
   },
   {
     "count" : 1,
@@ -149,11 +153,11 @@
   },
   {
     "count" : 1,
-    "city" : "Köln"
+    "city" : "København"
   },
   {
     "count" : 1,
-    "city" : "København"
+    "city" : "Köln"
   },
   {
     "count" : 1,
@@ -270,9 +274,5 @@
   {
     "count" : 1,
     "city" : "Walla Walla"
-  },
-  {
-    "count" : 1,
-    "city" : "Århus"
   }
 ]

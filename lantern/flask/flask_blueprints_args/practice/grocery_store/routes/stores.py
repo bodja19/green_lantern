@@ -3,7 +3,7 @@ from flask import request
 from flask_restful import Resource, reqparse
 
 parser = reqparse.RequestParser(bundle_errors=True)
-parser.add_argument('name', required=True, action='append', type=int)
+parser.add_argument('name', required=False, action='append', type=str)
 
 class Store(Resource):
 
@@ -13,8 +13,10 @@ class Store(Resource):
             store = db.stores.get_store_by_id(store_id)
             return store
         else:
-            args = parser.parser_args()
-            return args
+            args = parser.parse_args()
+            store_name = args['store_name']
+            store = db.stores.get_stores_by_name(store_name)
+            return store
 
     def post(self):
         db = inject.instance('DB')

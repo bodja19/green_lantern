@@ -63,10 +63,8 @@ class FakeStores:
         if store_id in self._stores:
             self._stores[store_id] = store
         else:
-            if store_id not in self._stores:
-                raise NoSuchStoreID(store_id)
-            else:
-                raise NoSuchManagerID
+            raise NoSuchStoreID(store_id)
+
 
 
 

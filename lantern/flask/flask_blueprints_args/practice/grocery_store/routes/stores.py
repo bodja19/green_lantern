@@ -3,7 +3,7 @@ from flask import request
 from flask_restful import Resource, reqparse
 
 parser = reqparse.RequestParser(bundle_errors=True)
-parser.add_argument('name', required=False, action='append', type=str)
+parser.add_argument('name', required=False, type=str)
 
 class Store(Resource):
 
@@ -14,7 +14,7 @@ class Store(Resource):
             return store
         else:
             args = parser.parse_args()
-            store_name = args['store_name']
+            store_name = args['name']
             store = db.stores.get_stores_by_name(store_name)
             return store
 

@@ -69,7 +69,7 @@ class FakeStores(Repository):
 
     def get_stores_by_name(self, store_name):
         for store_id, store_data in self._db.items():
-            if store_name == store_data['store_name']:
+            if store_name == store_data['name']:
                 return store_data
 
     def update_store_by_id(self, store_id, store):

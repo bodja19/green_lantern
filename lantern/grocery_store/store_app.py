@@ -1,5 +1,5 @@
-from flask import Flask, jsonify, request, marshal_with, restfull
-from flask_restful import field
+from flask import Flask, jsonify, request
+
 import inject
 
 
@@ -114,3 +114,6 @@ def update_good(good_id):
     db = inject.instance('DB')
     db.goods.update_good_by_id(good_id, request.json)
     return jsonify({f'successfully_updated': {good_id}})
+
+
+

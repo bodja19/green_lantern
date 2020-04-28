@@ -200,7 +200,6 @@ class TestGoods(Initializer):
             json={'name': 'Chocolate_bar',
                   'price': 10}
         )
-        print(resp.json[1])
         good_id = resp.json['good_id']
         resp = self.client.put(
             f'/goods/{good_id}',
@@ -208,13 +207,4 @@ class TestGoods(Initializer):
                   'price': 11}
         )
         assert resp.status_code == 200
-        assert resp.json == {'status': 'success'}
-
-
-
-
-
-
-
-
-
+        assert resp.json == {'successfully_updated': 1}

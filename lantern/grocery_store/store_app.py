@@ -113,7 +113,9 @@ def get_good(good_id):
 def update_good(good_id):
     db = inject.instance('DB')
     db.goods.update_good_by_id(good_id, request.json)
-    return jsonify({f'successfully_updated': {good_id}})
+    return jsonify({'successfully_updated': good_id})
+
+
 
 
 

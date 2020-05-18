@@ -41,3 +41,6 @@ def make_login_manager(app):
     def load_user(user_id):
         return User.query.get(user_id)
     return login_manager
+
+def make_goods(app):
+    take_goods = Good.query.all()

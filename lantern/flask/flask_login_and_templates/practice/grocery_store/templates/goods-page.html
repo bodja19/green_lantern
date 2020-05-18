@@ -1,18 +1,23 @@
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">name</th>
-      <th scope="col">brand</th>
-      <th scope="col">price</th>
-    </tr>
-  </thead>
+{% extends "base.html" %}
+
+{% block content %}
+<form method="GET" action="/goods">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+            <th scope="col">name</th>
+            <th scope="col">brand</th>
+            <th scope="col">price</th>
+            </tr>
+        </thead>
   <tbody>
- {% for row in rows %}
- <tr>
+    {% for row in rows %}
+    <tr>
      <td>{{ row.name }}</td>
      <td>{{ row.brand }}</td>
      <td>{{ row.price }}</td>
- </tr>
- {% endfor %}
+     </tr>
+    {% endfor %}
   </tbody>
 </table>
+{% endblock %}

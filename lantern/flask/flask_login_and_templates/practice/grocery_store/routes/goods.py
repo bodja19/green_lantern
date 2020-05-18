@@ -34,3 +34,4 @@ class Goods(Resource):
         db.session.delete(good)
         db.session.commit()
         return f"Successfully deleted User with id: {good_id}"
+

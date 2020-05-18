@@ -4,7 +4,7 @@ from flask_script import Server, Manager
 from flask_login import LoginManager
 
 from grocery_store.config import Config
-from grocery_store.models import User
+from grocery_store.models import User, Good
 from grocery_store.routes import users, goods, stores, auth, main
 from grocery_store.database import db
 from grocery_store.commands import Populate
@@ -33,14 +33,18 @@ def make_manager(app):
     manager.add_command('populate', Populate)
     return manager
 
+
 def make_login_manager(app):
     login_manager = LoginManager()
     login_manager.login_view = "auth.login"
     login_manager.init_app(app)
+
     @login_manager.user_loader
     def load_user(user_id):
         return User.query.get(user_id)
     return login_manager
 
-def make_goods(app):
-    take_goods = Good.query.all()
+# def take_goods(app):
+#     take_good = Good.quert.all()
+#     for good in take_good
+#         return good

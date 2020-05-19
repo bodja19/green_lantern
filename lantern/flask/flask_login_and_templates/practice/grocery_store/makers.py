@@ -44,7 +44,4 @@ def make_login_manager(app):
         return User.query.get(user_id)
     return login_manager
 
-# def take_goods(app):
-#     take_good = Good.quert.all()
-#     for good in take_good
-#         return good
+

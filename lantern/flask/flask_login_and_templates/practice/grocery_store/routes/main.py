@@ -14,6 +14,7 @@ def index():
 def profile():
     return render_template('profile.html', user=current_user.name, email=current_user.email)
 
-@main.route('/goods')
+@main.route('//goods_page')
 def goods_page():
-    return render_template('goods-page.html', good=Good.query.all)
+    rows = Good.query.all()
+    return render_template('goods-page.html', rows=rows)

@@ -1,17 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-<form method="GET" action="/goods_page">
+<form method="GET" action="/orders">
     <table class="table table-hover">
         <thead>
+        <h1> {{workuser}}</h1>>
+
             <tr>
-            <th scope="col">date</th>
-            <th scope="col">name</th>
-            <th scope="col">price</th>
+            <th scope="col">Date</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
             </tr>
         </thead>
     <tbody>
-         {% for row in rows %}
+         {% for row in order_line %}
         <tr>
          <td>{{ row.name }}</td>
          <td>{{ row.brand }}</td>

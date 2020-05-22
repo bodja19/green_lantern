@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template
 from grocery_store.database import db
 from flask_login import current_user, login_required
-from grocery_store.models import Good
+from grocery_store.models import Good, Order, OrderLine, User
 
 main = Blueprint('main', __name__)
 
@@ -10,11 +10,11 @@ main = Blueprint('main', __name__)
 def index():
     return render_template('index.html')
 
+
 @main.route('/profile')
 @login_required
 def profile():
-
-    return render_template('profile.html', user=current_user.name, email=current_user.email)
+    return render_template('profile.html',  user=current_user.name, email=current_user.email)
 
 @main.route('//goods_page')
 def goods_page():
@@ -23,4 +23,13 @@ def goods_page():
 
 @main.route('//orders')
 def order_page():
-    pass
+    user = current_user.user_id
+
+
+
+
+
+
+
+
+    return render_template('orders.html', workuser=workuser)

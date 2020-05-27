@@ -14,16 +14,34 @@ def index():
 @main.route('/profile')
 @login_required
 def profile():
-    return render_template('profile.html',  user=current_user.name, email=current_user.email)
+    return render_template('profile.html', user=current_user.name, email=current_user.email)
+
 
 @main.route('//goods_page')
 def goods_page():
     rows = Good.query.all()
     return render_template('goods-page.html', rows=rows)
 
+
 @main.route('//orders')
+@login_required
 def order_page():
-    user = current_user.user_id
+    good = []
+    goods = Good.query.all()
+    orders_line = OrderLine.query.all()
+    orders = Order.query.filter_by(user_id=current_user.user_id).all()
+
+    for number_order in orders:                     #дістаю ід кожного замовлення
+        order_Id = [OrderLine(order_id=number_order)]    #получаю змінну в якій є дані товарів в замовленні
+        good.append(order_Id)
+        goods = [Good(good_id=order_Id)]
+        return render_template('orders.html', data=number_order, goods=goods)
+
+
+
+    # for god_id in good:
+    #     Good(good_id=god_id)
+    # return render_template('orders.html', goods=goods)
 
 
 
@@ -31,5 +49,37 @@ def order_page():
 
 
 
+
+
+    # user_order = Order.query.filter_by(user_id=current_user.user_id).all()
+    #
+    # for number_order in user_order:
+    #     order_line = [OrderLine.query(OrderLine.good_id).filter_by(order_id=number_order.order_id).all()]
+    #     for line in order_line:
+    #         good = [Good.query(Good.good_id).filter_by(good_id=line).first()]
+    #     good.append(good)
+    # goods = Good.query.filter_by(good_id=good).all()
+    # return render_template('orders.html', goods=goods)
+
+
+    # users = User.query.all()
+    # goods = Good.query.all()
+    # stores = Store.query.all()
+    # import pdb;
+    # pdb.set_trace()
+    # pass
+    # #
+    # # for user in users:
+    # #     number_of_orders = randint(1, 5)
+    # #     for _ in range(number_of_orders):
+    # #         number_of_goods = randint(1, 10)
+    # #
+    # #         order = Order()
+    # #         order_lines = [OrderLine(good=good) for good in sample(goods, number_of_goods)]
+    # #         order.order_lines = order_lines
+    # #         order.user = user
+    # #         order.store = choice(stores)
+    # #         db.session.add(order)
+    # # db.session.commit()
 
     return render_template('orders.html', workuser=workuser)

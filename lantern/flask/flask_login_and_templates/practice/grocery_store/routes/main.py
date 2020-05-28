@@ -26,16 +26,30 @@ def goods_page():
 @main.route('//orders')
 @login_required
 def order_page():
-    good = []
     goods = Good.query.all()
-    orders_line = OrderLine.query.all()
     orders = Order.query.filter_by(user_id=current_user.user_id).all()
-
+    orders_line = OrderLine.query.all()
     for number_order in orders:                     #дістаю ід кожного замовлення
-        order_Id = [OrderLine(order_id=number_order)]    #получаю змінну в якій є дані товарів в замовленні
-        good.append(order_Id)
-        goods = [Good(good_id=order_Id)]
-        return render_template('orders.html', data=number_order, goods=goods)
+        order_number = number_order.order_id
+        print(number_order.order_id)
+        orderline = OrderLine.query.filter_by(order_id=number_order.order_id).all() #получаю змінну в якій є дані товарів в замовленні
+        print(orderline)
+        print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+        all_goods = {}
+        for line in orderline:
+            print(line.good_id)
+            print('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB')
+            product = Good.query.filter_by(good_id=line.good_id).all()
+            show = product.name
+            print(show)
+            print('TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT')
+            # print(product)
+        print(all_goods)
+        # for x in all_goods:
+        #     show_name = Good.query.filter_by(good_id=x).all()
+        # print(show_name)
+
+    return render_template('orders.html', data=number_order, goods=all_goods)
 
 
 

@@ -43,7 +43,7 @@ class Cat:
     * Додайте до класу value_speed змінної класу, яка отримає її значення
       від приватного методу _set_average_speed ()
 
-    * Додати до змінної saturation_level класу зі значенням 50
+  
 
     * Реалізуйте приватні методи _increase_saturation_level та _reduce_saturation_level
       який отримає значення і додасть / відніме з saturation_level це значення

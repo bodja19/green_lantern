@@ -29,41 +29,17 @@ def order_page():
     goods = Good.query.all()
     orders = Order.query.filter_by(user_id=current_user.user_id).all()
     orders_line = OrderLine.query.all()
+    key = []
     for number_order in orders:                     #дістаю ід кожного замовлення
-        order_number = number_order.order_id
-        print(number_order.order_id)
-        orderline = OrderLine.query.filter_by(order_id=number_order.order_id).all() #получаю змінну в якій є дані товарів в замовленні
-        print(orderline)
-        print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
-        all_goods = {}
-        for line in orderline:
-            print(line.good_id)
-            print('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB')
-            product = Good.query.filter_by(good_id=line.good_id).all()
-            show = product.name
-            print(show)
-            print('TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT')
-            # print(product)
-        print(all_goods)
-        # for x in all_goods:
-        #     show_name = Good.query.filter_by(good_id=x).all()
-        # print(show_name)
-
-    return render_template('orders.html', data=number_order, goods=all_goods)
+        orders_line = OrderLine.query.get(order_id=orders.number_order)
+        print(orders_line)
+    return render_template('orders.html', datas=orders_line, goods=goods)
 
 
 
     # for god_id in good:
     #     Good(good_id=god_id)
     # return render_template('orders.html', goods=goods)
-
-
-
-
-
-
-
-
 
     # user_order = Order.query.filter_by(user_id=current_user.user_id).all()
     #
@@ -82,7 +58,6 @@ def order_page():
     # import pdb;
     # pdb.set_trace()
     # pass
-    # #
     # # for user in users:
     # #     number_of_orders = randint(1, 5)
     # #     for _ in range(number_of_orders):
@@ -95,5 +70,4 @@ def order_page():
     # #         order.store = choice(stores)
     # #         db.session.add(order)
     # # db.session.commit()
-
-    return render_template('orders.html', workuser=workuser)
+    # return render_template('orders.html', workuser=workuser)

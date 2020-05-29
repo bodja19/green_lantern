@@ -7,22 +7,31 @@
             <tr>
             <th scope="col">#</th>
             <th scope="col">Date</th>
+            <tbody>
+         <tr>
+         <td>{{ datas.order_id }}</td>
+         <td>{{ datas.created_time }}</td>
+         </tr>
+    </tbody>
+        </table>
+                <table class="table table-hover">
+        <thead>
+            <tr>
             <th scope="col">Brand</th>
             <th scope="col">Price</th>
             </tr>
         </thead>
-    <tbody>
-         <td>{{ data.order_id }}</td>
-         <td>{{ data.created_time }}</td>
-         <td>{{ goods }}</td>
-         {% for good in goods %}
-        <tr>
-         <td>{{ good.name }}</td>
-         <td>{{ good.price }}</td>
+        <tbody>
+              {% for good in goods %}
+             <td>{{ good.name }}</td>
+             <td>{{ good.price }}</td>
          </tr>
-         {% endfor %}
-    </tbody>
-    </table>
+              {% endfor %}
+        </tbody>
+     </table>
+            </tr>
+        </thead>
+
 </form>
     {% endblock %}
 

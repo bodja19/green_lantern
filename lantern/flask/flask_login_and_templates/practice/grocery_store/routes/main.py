@@ -28,14 +28,15 @@ def goods_page():
 def order_page():
     goods = Good.query.all()
     orders = Order.query.filter_by(user_id=current_user.user_id).all()
-    orders_line = OrderLine.query.all()
+    orders_lin = OrderLine.query.all()
     key = []
     for number_order in orders:                     #дістаю ід кожного замовлення
-        orders_line = OrderLine.query.get(order_id=orders.number_order)
+        print(number_order.user_id, number_order.order_id)
+        orders_line = OrderLine.query.get(order_id=number_order.number_order)
+
+        #orders_line = OrderLine.query.get()
         print(orders_line)
-    return render_template('orders.html', datas=orders_line, goods=goods)
-
-
+    return render_template('orders.html', datas=orders, goods=goods)
 
     # for god_id in good:
     #     Good(good_id=god_id)

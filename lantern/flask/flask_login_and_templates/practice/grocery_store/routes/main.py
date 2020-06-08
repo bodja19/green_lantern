@@ -26,17 +26,59 @@ def goods_page():
 @main.route('//orders')
 @login_required
 def order_page():
-    goods = Good.query.all()
     orders = Order.query.filter_by(user_id=current_user.user_id).all()
-    orders_lin = OrderLine.query.all()
     key = []
-    for number_order in orders:                     #дістаю ід кожного замовлення
-        print(number_order.user_id, number_order.order_id)
-        orders_line = OrderLine.query.get(order_id=number_order.number_order)
 
-        #orders_line = OrderLine.query.get()
-        print(orders_line)
-    return render_template('orders.html', datas=orders, goods=goods)
+    for number_order in orders:                     #дістаю ід кожного замовлення
+
+        for orderline in OrderLine.query.filter(number_order.order_id == OrderLine.order_id).all():
+            good = Good.query.filter(orderline.good_id == Good.good_id).first()
+            goodname = good.name
+            goodprice = good.price
+            print(good.name)
+            print(orderline.good_id)
+            listorder = {'numberOrder': number_order.order_id,
+                         'time': number_order.created_time,
+                         'name': goodname,
+                         'price': goodprice}
+            # listorder = goodname, goodprice
+            key.append(listorder)
+    print('Отут буде key')
+    print(key)
+    print('list')
+    print(listorder)
+    goods = []
+    # for good in listorders:
+    #     good = Good
+    return render_template('orders.html', goods=key)
+
+
+
+
+    # goods = Good.query.all()
+    # orders = Order.query.filter_by(user_id=current_user.user_id).all()
+    # orders_lin = OrderLine.query.all()
+    # key = []
+    # for number_order in orders:                     #дістаю ід кожного замовлення
+    #     print(number_order.user_id, number_order.order_id)
+    #     inOrder_goods = {}
+    #     key.append(inOrder_goods)
+    #     for product in OrderLine.query.filter(number_order.order_id == OrderLine.order_id).all():
+    #         goods_query = Good.query.filter(product.good_id == Good.good_id).first()
+    #         # inOrder_goods.append([goods_query.name], [goods_query.price])
+    #         inOrder_goods['name', 'price'] = goods_query.name, goods_query.price
+    #         # print(goods_query.name)
+    #
+    #     # good = Good.query.filter(orders_line.good_id == Good.good_id).first()
+    #     # key.append(good)
+    #     # goo = good.name
+    #     print('List of order ')
+    #     print(inOrder_goods)
+    #     # print(number_order.order_id)
+    #     # orders_line = OrderLine.query.get()
+    #     # print(orders_line)
+    # print(key)
+    # return render_template('orders.html', datas=orders, goods=key)
 
     # for god_id in good:
     #     Good(good_id=god_id)

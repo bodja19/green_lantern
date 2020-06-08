@@ -18,6 +18,7 @@
          <td>{{ order['time'] }}</td>
          <td>{{ order['name'] }}</td>
          <td>{{ order['price'] }}</td>
+         <td>{{ sum(order['price']) }}</td>
          </tr>
          {% endfor %}
     </tbody>

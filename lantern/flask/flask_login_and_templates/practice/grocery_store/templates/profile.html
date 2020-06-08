@@ -5,4 +5,26 @@
   Welcome, {{ user }}!
   Your email is {{ email }}
 </h1>
-{% endblock %}
+<h1>
+        <form method="GET" action="/goods_page">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">City</th>
+                    <th scope="col">Address</th>
+                    </tr>
+                </thead>
+            <tbody>
+                 {% for store in stores %}
+                <tr>
+                 <td>{{ store.name }}</td>
+                 <td>{{ store.city }}</td>
+                 <td>{{ store.address }}</td>
+                 </tr>
+                 {% endfor %}
+            </tbody>
+            </table>
+        </form>
+        {% endblock %}
+</h1>

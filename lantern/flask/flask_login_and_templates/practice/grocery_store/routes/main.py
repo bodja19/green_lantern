@@ -32,41 +32,35 @@ def goods_page():
 @main.route('//orders')
 @login_required
 def order_page():
-    orders = Order.query.filter_by(user_id=current_user.user_id).all()
     key = []
-
-    for number_order in orders:                     #дістаю ід кожного замовлення
-        suma_order = []
-        print('nenenenenenene')
-        print('aaaaaaaaaaaaa')
+    order = []
+    for number_order in Order.query.filter_by(user_id=current_user.user_id).all():                     #дістаю ід кожного замовлення
+        suma_order = 0
         order_time = datetime.strftime(number_order.created_time, '%G-%b-%d %I:%M %p')
         listorder = {'numberOrder': number_order.order_id,
                      'time': order_time,
                      'name': '',
                      'price': '',
-                     'suma': suma_order}
+                     'suma': ''}
         key.append(listorder)
-        suma_order = []
         for orderline in OrderLine.query.filter(number_order.order_id == OrderLine.order_id).all():
             good = Good.query.filter(orderline.good_id == Good.good_id).first()
-            goodname = good.name
-            goodprice = good.price
-            listorder = {'name': goodname,
-                         'price': goodprice}
-            suma_order.append(goodprice)
-            print('jnenenneen')
+            listorder = {'name': good.name,
+                         'price': good.price}
             key.append(listorder)
+            suma_order += good.price
+        listorder = {'suma': suma_order}
+        key.append(listorder)
+        order.append(suma_order)
+    all_sume = sum(order)
+    print('aaaaaaaaaaaaaaaa')
+    print(all_sume, 'aaaaaaaaaaaaaaa')
 
-    return render_template('orders.html', goods=key)
+    # listorder = {'all_sume': all_sume}
+    # key.append(listorder)
+    # print(all_sume)
+    return render_template('orders.html', goods=key, all_sume=all_sume)
 
-
-# def correct_time(number_order):
-#     time = number_order.created_time
-#     import datetime
-#     time.datetime.datetime.strftime('%b-%d-%I%M%p-%G')
-#     print(time)
-#     print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
-#     return time
 
 
 

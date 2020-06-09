@@ -9,7 +9,8 @@
             <th scope="col">Time</th>
             <th scope="col">Name</th>
             <th scope="col">Price</th>
-            <th scope="col">Suma</th>
+            <th scope="col">Price orders</th>
+
             </tr>
         </thead>
     <tbody>
@@ -20,9 +21,11 @@
          <td>{{ order['name'] }}</td>
          <td>{{ order['price'] }}</td>
          <td>{{ order['suma'] }}</td>
-         </tr>
+        </tr>
          {% endfor %}
     </tbody>
+        <th align="left">Total:</th>
+        <th align="right">{{ all_sume }}</th>
     </table>
 </form>
     {% endblock %}

@@ -1,14 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="title">
+     <h1 class="title">
   Welcome, {{ user }}!
   Your email is {{ email }}
 </h1>
-<h1>
-        <form method="GET" action="/goods_page">
+{% if stores is defined %}
+        <form method="GET" action="/profile">
             <table class="table table-hover">
                 <thead>
+
                     <tr>
                     <th scope="col">Name</th>
                     <th scope="col">City</th>
@@ -26,5 +27,9 @@
             </tbody>
             </table>
         </form>
-        {% endblock %}
-</h1>
+    </a>
+{% endif %}
+
+
+{% endblock %}
+

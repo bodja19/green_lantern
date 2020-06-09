@@ -2,7 +2,7 @@ from flask import Blueprint, render_template
 from grocery_store.database import db
 from flask_login import current_user, login_required
 from grocery_store.models import Good, Order, OrderLine, Store
-
+from datetime import datetime
 main = Blueprint('main', __name__)
 
 
@@ -18,7 +18,8 @@ def profile():
     manager_store = []
     for store in stores:
         manager_store.append(store)
-
+    if len(manager_store) == 0:
+        return render_template('profile.html', user=current_user.name, email=current_user.email)
     return render_template('profile.html', user=current_user.name, email=current_user.email, stores=manager_store)
 
 
@@ -35,29 +36,40 @@ def order_page():
     key = []
 
     for number_order in orders:                     #дістаю ід кожного замовлення
+        suma_order = []
+        print('nenenenenenene')
+        print('aaaaaaaaaaaaa')
+        order_time = datetime.strftime(number_order.created_time, '%G-%b-%d %I:%M %p')
         listorder = {'numberOrder': number_order.order_id,
-                     'time': number_order.created_time,
+                     'time': order_time,
                      'name': '',
-                     'price': ''}
+                     'price': '',
+                     'suma': suma_order}
         key.append(listorder)
+        suma_order = []
         for orderline in OrderLine.query.filter(number_order.order_id == OrderLine.order_id).all():
             good = Good.query.filter(orderline.good_id == Good.good_id).first()
             goodname = good.name
             goodprice = good.price
-            print(good.name)
-            print(orderline.good_id)
             listorder = {'name': goodname,
                          'price': goodprice}
-            # listorder = goodname, goodprice
+            suma_order.append(goodprice)
+            print('jnenenneen')
             key.append(listorder)
-    print('Отут буде key')
-    print(key)
-    print('list')
-    print(listorder)
-    goods = []
-    # for good in listorders:
-    #     good = Good
+
     return render_template('orders.html', goods=key)
+
+
+# def correct_time(number_order):
+#     time = number_order.created_time
+#     import datetime
+#     time.datetime.datetime.strftime('%b-%d-%I%M%p-%G')
+#     print(time)
+#     print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+#     return time
+
+
+
 
 
 

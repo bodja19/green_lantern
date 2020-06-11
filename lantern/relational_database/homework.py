@@ -1,6 +1,5 @@
 from typing import List
 
-
 def task_1_add_new_record_to_db(con) -> None:
     """
     Add a record for a new customer from Singapore
@@ -19,7 +18,8 @@ def task_1_add_new_record_to_db(con) -> None:
     Returns: 92 records
 
     """
-    pass
+    with con.cursor() as cursor:
+        cursor.execute("INSERT INTO customers VALUES(92,'Thomas','David','Some Address','London','774','Singapore');")
 
 
 def task_2_list_all_customers(cur) -> list:

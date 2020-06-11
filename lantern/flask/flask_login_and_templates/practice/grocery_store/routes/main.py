@@ -53,20 +53,4 @@ def order_page():
         key.append(listorder)
         order.append(suma_order)
     all_sume = sum(order)
-    print('aaaaaaaaaaaaaaaa')
-    print(all_sume, 'aaaaaaaaaaaaaaa')
-
-    # listorder = {'all_sume': all_sume}
-    # key.append(listorder)
-    # print(all_sume)
     return render_template('orders.html', goods=key, all_sume=all_sume)
-
-
-
-
-
-
-
-
-
-

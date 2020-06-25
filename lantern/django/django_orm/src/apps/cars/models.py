@@ -71,7 +71,7 @@ class Car(BaseDateAuditModel):
     slug = models.SlugField(max_length=75)
     number = models.CharField(max_length=16, unique=True)
     status = models.CharField(max_length=15, choices=STATUS_CHOICES, default=STATUS_PENDING, blank=True)
-    # dealer = models.ForeignKey('Dealer', on_delete=models.CASCADE, related_name='cars')
+    dealer = models.ForeignKey('Dealer', on_delete=models.CASCADE, related_name='cars')
 
     model = models.ForeignKey(to='CarModel', on_delete=models.SET_NULL, null=True, blank=False)
     extra_title = models.CharField(max_length=255, null=True, blank=True, verbose_name=_('Title second part'))

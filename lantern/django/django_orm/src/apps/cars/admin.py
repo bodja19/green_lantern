@@ -13,7 +13,7 @@ class ColorAdmin(admin.ModelAdmin):
 
 @admin.register(CarModel)
 class CarModelAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name', 'brand')
 
 
 @admin.register(CarBrand)

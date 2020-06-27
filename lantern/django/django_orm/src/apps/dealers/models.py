@@ -1,41 +1,55 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.db.models import Index
 
 
-class DealerCountry(models.Model):
+class Country(models.Model):
     name = models.CharField(max_length=32, unique=True)
-    Code = models.IntegerField(max_length=10, null=True, unique=True)
+    Code = models.CharField(max_length=10, null=True, unique=True)
 
     class Meta:
-        ordering = ('name',)
         indexes = [
             Index(fields=('name',))
         ]
         verbose_name = _('Contry')
-        verbose_name_plural = _('Country')
+        verbose_name_plural = _('Countries')
 
     def __str__(self):
         return self.name
 
 
-class DealerCity(models.Model):
-    name = models.CharField(Dealer=40)
-    country = models.ForeignKey(DealerCountry, on_delete=models.CASCADE)
+class City(models.Model):
+    name = models.CharField(max_length=40)
+    country = models.ForeignKey(to='Country', on_delete=models.SET_NULL, null=True, related_name='cities')
 
     class Meta:
-        ordering = ('name',)
         indexes = [
             Index(fields=('name',)),
         ]
-        verbose_name = _('Car model')
-        verbose_name_plural = _('Car models')
+        verbose_name = _('Сity')
+        verbose_name_plural = _('Сities')
 
     def __str__(self):
         return self.name
 
-class Dealer(models.Model):
-    title = models.CharField(max_length=64)
-    email = models.EmailField(max_length=40, null=True, unique=True)
-    city = model = models.ForeignKey(to='DealerCity', on_delete=models.SET_NULL, null=True, blank=False)
 
+class Dealer(User):
+    user = models.OneToOneField(User, parent_link=True, on_delete=models.CASCADE)
+    title = models.CharField(max_length=64)
+    city = models.ForeignKey(to='City', on_delete=models.SET_NULL, null=True, blank=False)
+
+    class Meta:
+        verbose_name = _('Dealer')
+        verbose_name_plural = _('Dealers')
+
+        indexes = [
+            Index(fields=['user', ])
+        ]
+
+    @property
+    def title(self):
+        return f'{self.get_full_name()}, from: {self.city.name}, email: {self.email}'
+
+    def __str__(self):
+        return self.title

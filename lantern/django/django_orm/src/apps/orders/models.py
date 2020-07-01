@@ -24,7 +24,7 @@ class Order(BaseDateAuditModel):
     first_name = models.CharField(max_length=32, unique=True)
     last_name = models.CharField(max_length=32, unique=True)
     email = models.EmailField(max_length=40, unique=True)
-    phone = models.IntegerField(max_length=15, null=False, blank=True, unique=True)
+    phone = models.CharField(max_length=15, null=False, blank=True, unique=True)
     message = models.TextField(max_length=500, blank=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=STATUS_PENDING, blank=True)
     car = models.ManyToManyField(to='cars.Car', related_name='orders')

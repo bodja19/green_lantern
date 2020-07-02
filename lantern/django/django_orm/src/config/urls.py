@@ -23,6 +23,7 @@ from apps.newsletters.views import NewsLetterView
 
 from common.views import LoginView, logout_view
 
+from apps.cars.views import CarList
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,6 +31,8 @@ urlpatterns = [
     path('newsletter/', NewsLetterView.as_view(), name='newsletter'),
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', logout_view, name='logout'),
+    path('cars/', CarList.as_view(), name='cars'),
+    path('car/', CarList.as_view(), name='car'),
 ]
 
 if settings.DEBUG:
